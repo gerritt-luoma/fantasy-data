@@ -19,23 +19,23 @@
 	element.async = true;
 	element.type = 'text/javascript';
 	element.src = url;
-	
+
 	firstScript.parentNode.insertBefore(element, firstScript);
-	
+
 	function makeStub() {
 	    var TCF_LOCATOR_NAME = '__tcfapiLocator';
 	    var queue = [];
 	    var win = window;
 	    var cmpFrame;
-	    
+
 	    function addFrame() {
 		var doc = win.document;
 		var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
-		
+
 		if (!otherCMP) {
 		    if (doc.body) {
 			var iframe = doc.createElement('iframe');
-			
+
 			iframe.style.cssText = 'display:none';
 			iframe.name = TCF_LOCATOR_NAME;
 			doc.body.appendChild(iframe);
@@ -45,11 +45,11 @@
 		}
 		return !otherCMP;
 	    }
-	    
+
 	    function tcfAPIHandler() {
 		var gdprApplies;
 		var args = arguments;
-		
+
 		if (!args.length) {
 		    return queue;
 		} else if (args[0] === 'setGdprApplies') {
@@ -69,7 +69,7 @@
 			cmpLoaded: false,
 			cmpStatus: 'stub'
 		    };
-		    
+
 		    if (typeof args[2] === 'function') {
 			args[2](retr);
 		    }
@@ -77,11 +77,11 @@
 		    queue.push(args);
 		}
 	    }
-	    
+
 	    function postMessageEventHandler(event) {
 		var msgIsString = typeof event.data === 'string';
 		var json = {};
-		
+
 		try {
 		    if (msgIsString) {
 			json = JSON.parse(event.data);
@@ -89,9 +89,9 @@
 			json = event.data;
 		    }
 		} catch (ignore) {}
-		
+
 		var payload = json.__tcfapiCall;
-		
+
 		if (payload) {
 		    window.__tcfapi(
 			payload.command,
@@ -113,7 +113,7 @@
 		    );
 		}
 	    }
-	    
+
 	    while (win) {
 		try {
 		    if (win.frames[TCF_LOCATOR_NAME]) {
@@ -121,7 +121,7 @@
 			break;
 		    }
 		} catch (ignore) {}
-		
+
 		if (win === window.top) {
 		    break;
 		}
@@ -133,9 +133,9 @@
 		win.addEventListener('message', postMessageEventHandler, false);
 	    }
 	};
-	
+
 	makeStub();
-	
+
 	var uspStubFunction = function() {
 	    var arg = arguments;
 	    if (typeof window.__uspapi !== uspStubFunction) {
@@ -146,7 +146,7 @@
 		}, 500);
 	    }
 	};
-	
+
 	var checkIfUspIsReady = function() {
 	    uspTries++;
 	    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
@@ -155,7 +155,7 @@
 		clearInterval(uspInterval);
 	    }
 	};
-	
+
 	if (typeof window.__uspapi === 'undefined') {
 	    window.__uspapi = uspStubFunction;
 	    var uspInterval = setInterval(checkIfUspIsReady, 6000);
@@ -164,8 +164,8 @@
 </script>
 <!-- End Quantcast Choice. Consent Manager Tag v2.0 (for TCF 2.0) -->
 
-    
-    
+
+
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -177,8 +177,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <title>2021 NFL Passing | Pro-Football-Reference.com</title>
 
-    
-    
+
+
     <meta name="Description" content="Check out the 2021 NFL Passing Stats and more on Pro-football-reference.com">
     <link rel="canonical" href="https://www.pro-football-reference.com/years/2021/passing.htm" />
 
@@ -229,7 +229,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
     <meta name="theme-color" content="#384d42" />
     <meta name="msapplication-navbutton-color" content="#384d42" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#384d42" />
-    
+
 
 
 
@@ -290,7 +290,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
     else {
          freestar.config.enabled_slots.push('div-gpt-ad-160x600-1');
          freestar.config.enabled_slots.push('div-gpt-ad-160x600-2');
-    } 
+    }
 
 </script>
 <script data-cfasync="false" type="text/javascript">
@@ -305,7 +305,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
 !function(a,b){
     if (sr_detect_ie || sr_detect_edge || Modernizr.adfree) {
         return;
-    }  
+    }
     var c=b.getElementsByTagName("script")[0],
     d=b.createElement("script"),
     e="https://a.pub.network/pro-football-reference";
@@ -323,14 +323,14 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
 </head>
 <body class="pfr">
 
-    
+
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PSRGLHM"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div id="wrap">
-  
+
   <div id="header" role="banner">
   <ul id="subnav" class="notranslate">
 	<li><a href="https://www.sports-reference.com/"><svg height="15px" width="20px"><use xlink:href="#ic-sr-pennant"></use></svg> Sports&nbsp;Reference&#8239;&reg;</a></li>
@@ -340,9 +340,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<li><a href="https://www.hockey-reference.com/">Hockey</a></li>
 
 
-	
-	
-	
+
+
+
 	<li><a href="https://fbref.com/it/">Calcio</a></li>
 
 	<li><a href="https://www.sports-reference.com/blog/">Blog</a></li>
@@ -366,12 +366,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<li id="header_years" class="current"><a href="/years/">Seasons</a></li>
 		<li id="header_leaders" ><a href="/leaders/">Leaders</a></li>
 		<li id="header_scores" ><a href="/boxscores/">NFL Scores</a></li>
-		
-		<li id="header_draft" class=""><a href="/draft/">Draft</a></li>	
-		
+
+		<li id="header_draft" class=""><a href="/draft/">Draft</a></li>
+
 		<li id="header_playindex" class=""><a href="https://stathead.com/sport/football/?utm_medium=pfr&utm_source=top-nav-bar&utm_campaign=football">Stathead</a></li>
 		<li><a href="https://www.pro-football-reference.com/email/">Newsletter</a></li>
-		
+
 		<li><a data-scroll href="#site_menu_link" class="opener">Full Site Menu Below</a></li>
 	</ul>
 	<div class="breadcrumbs">You are here: <div itemscope itemtype="https://schema.org/BreadcrumbList" class="crumbs"><span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">PFR Home Page</span></a> <meta itemprop="position" content="1" /></span> &gt; <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="/years/"><span itemprop="name">All Years</span></a> <meta itemprop="position" content="2" /></span> &gt; <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="/years/2021/"><span itemprop="name">2021 NFL</span></a> <meta itemprop="position" content="3" /></span> &gt; <strong>Passing</strong></div></div>
@@ -435,33 +435,33 @@ sr_menus_setupMainNav_button_inline();
 
 <div id="info" class="years">
 	<div id="meta">
-        
+
 
 
 	<div class="media-item logo loader">
 		<img class="teamlogo"			src="https://d2p3bygnnzw9w3.cloudfront.net/req/202207051/tlogo/pfr/NFL.png"
 			alt=" Logo">
-		
+
 			<p><a href="http://www.sportslogos.net/">via Sports Logos.net</a></p>
 			<p><a href="https://www.sports-reference.com/blog/2016/06/redesign-team-and-league-logos-courtesy-sportslogos-net/">About logos</a></p>
-		 
+
 	</div>
 
 
 
 		<div>
 			<h1>
-				
+
 				<span>2021</span> <span>NFL</span> <span class="header_end">Passing</span>
-				
+
 			</h1>
 			<div class="prevnext">
-  
+
   <a href="/years/2020/passing.htm" class="button2 prev">Previous Season</a>
-  
-  
+
+
   <a href="/years/2022/passing.htm" class="button2 next">Next Season</a>
-  
+
 </div>
 
 			<p><strong>Super Bowl Champion</strong>: <a href="/teams/ram/2021.htm">Los Angeles Rams</a>
@@ -472,15 +472,15 @@ sr_menus_setupMainNav_button_inline();
 <p><strong>Passing Leader</strong>: <a href="/players/B/BradTo00.htm">Tom Brady</a>, 5316 Yds</p>
 <p><strong>Rushing Leader</strong>: <a href="/players/T/TaylJo02.htm">Jonathan Taylor</a>, 1811 Yds</p>
 <p><strong>Receiving Leader</strong>: <a href="/players/K/KuppCo00.htm">Cooper Kupp</a>, 1947 Yds</p>
-			
-			
+
+
 			<button id="meta_more_button" class="opener" data-type="hide_after" data-class="open" data-id="info">More league info</button>
 <script>
 // see sr.menus.js:sr_menus_checkInfoCookie to explain
 function sr_menus_checkInfoCookie_inline(browserType) {
     var el_info = document.getElementById('info');
     var el_button = document.getElementById('meta_more_button');
-    var bling_len = 0;    
+    var bling_len = 0;
     if (!el_button || !el_info || !el_info.classList) { console.log('no meta_button'); return; }
     var el = el_button;
     var siblingsHidden = 0;
@@ -497,7 +497,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
 
 		</div>
 	</div>
-	
+
 <div class="adblock ad300">
 
 <!-- div#fs_fs_300_atf  -->
@@ -769,54 +769,54 @@ var sr_menus_checkInfoCookie_run_inline = true;
 
 			</div>		</li>
 	</ul>
-	    
-    
-        
-        
-        
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-                
-                
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div><!-- div#inner_nav -->
 <div id="content" role="main">
-    
 
 
-          
-      
-      
-      
-      
+
+
+
+
+
+
 
 <!-- fs_general_header -->
 <div class="adblock">
@@ -837,9 +837,9 @@ var sr_menus_checkInfoCookie_run_inline = true;
 </div>
 
 
-      
-         
-            
+
+
+
 <div id="all_passing" class="table_wrapper setup_long long">
 
 <div class="section_heading assoc_passing" id="passing_sh">
@@ -847,16 +847,16 @@ var sr_menus_checkInfoCookie_run_inline = true;
       <ul><li>* Selected to Pro Bowl, + First-Team All-Pro</li>
       </ul>
     </div>
-    		
+
 </div>
 <div class="table_container" id="div_passing">
-    
+
     <table class="per_match_toggle sortable stats_table" id="passing" data-cols-to-freeze=",2" data-non-qual="1" data-qual-text="" data-qual-label=" When table is sorted, hide non-qualifiers for rate stats">
     <caption>Passing Table</caption>
-    
+
 
    <colgroup><col><col><col><col><col><col><col><col><col><col><col><col class="sort_col"><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup>
-   <thead>      
+   <thead>
       <tr>
          <th aria-label="Rk" data-stat="ranker" scope="col" class="ranker poptip sort_default_asc show_partial_when_sorting center" data-tip="<b>Rank</b><br>This is a count of the rows from top to bottom.<br>It is recalculated following the sorting of a column." >Rk</th>
          <th aria-label="Player" data-stat="player" scope="col" class=" poptip sort_default_asc show_partial_when_sorting left" >Player</th>
@@ -921,7 +921,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
 <tr ><th scope="row" class="right " data-stat="ranker" csk="28" >28</th><td class="left " data-append-csv="DarnSa00" data-stat="player" csk="Darnold,Sam" ><a href="/players/D/DarnSa00.htm">Sam Darnold</a></td><td class="left " data-stat="team" ><a href="/teams/car/2021.htm" title="Carolina Panthers">CAR</a></td><td class="right " data-stat="age" >24</td><td class="left " data-stat="pos" >QB</td><td class="right " data-stat="g" >12</td><td class="right " data-stat="gs" >11</td><td class="right " data-stat="qb_rec" csk="0.36363636364" >4-7-0</td><td class="right " data-stat="pass_cmp" >243</td><td class="right " data-stat="pass_att" >406</td><td class="right " data-stat="pass_cmp_perc" >59.9</td><td class="right " data-stat="pass_yds" >2527</td><td class="right " data-stat="pass_td" >9</td><td class="right " data-stat="pass_td_perc" >2.2</td><td class="right " data-stat="pass_int" >13</td><td class="right " data-stat="pass_int_perc" >3.2</td><td class="right " data-stat="pass_first_down" >123</td><td class="right " data-stat="pass_long" >63</td><td class="right " data-stat="pass_yds_per_att" >6.2</td><td class="right " data-stat="pass_adj_yds_per_att" >5.2</td><td class="right " data-stat="pass_yds_per_cmp" >10.4</td><td class="right " data-stat="pass_yds_per_g" >210.6</td><td class="right " data-stat="pass_rating" >71.9</td><td class="right " data-stat="qbr" >33.2</td><td class="right " data-stat="pass_sacked" >35</td><td class="right " data-stat="pass_sacked_yds" >204</td><td class="right " data-stat="pass_sacked_perc" >7.9</td><td class="right " data-stat="pass_net_yds_per_att" >5.27</td><td class="right " data-stat="pass_adj_net_yds_per_att" >4.35</td><td class="right iz" data-stat="comebacks" ></td><td class="right iz" data-stat="gwd" ></td></tr>
 <tr ><th scope="row" class="right " data-stat="ranker" csk="29" >29</th><td class="left " data-append-csv="JoneDa05" data-stat="player" csk="Jones,Daniel" ><a href="/players/J/JoneDa05.htm">Daniel Jones</a></td><td class="left " data-stat="team" ><a href="/teams/nyg/2021.htm" title="New York Giants">NYG</a></td><td class="right " data-stat="age" >24</td><td class="left " data-stat="pos" >QB</td><td class="right " data-stat="g" >11</td><td class="right " data-stat="gs" >11</td><td class="right " data-stat="qb_rec" csk="0.36363636364" >4-7-0</td><td class="right " data-stat="pass_cmp" >232</td><td class="right " data-stat="pass_att" >361</td><td class="right " data-stat="pass_cmp_perc" >64.3</td><td class="right " data-stat="pass_yds" >2428</td><td class="right " data-stat="pass_td" >10</td><td class="right " data-stat="pass_td_perc" >2.8</td><td class="right " data-stat="pass_int" >7</td><td class="right " data-stat="pass_int_perc" >1.9</td><td class="right " data-stat="pass_first_down" >116</td><td class="right " data-stat="pass_long" >54</td><td class="right " data-stat="pass_yds_per_att" >6.7</td><td class="right " data-stat="pass_adj_yds_per_att" >6.4</td><td class="right " data-stat="pass_yds_per_cmp" >10.5</td><td class="right " data-stat="pass_yds_per_g" >220.7</td><td class="right " data-stat="pass_rating" >84.8</td><td class="right " data-stat="qbr" >41.5</td><td class="right " data-stat="pass_sacked" >22</td><td class="right " data-stat="pass_sacked_yds" >160</td><td class="right " data-stat="pass_sacked_perc" >5.7</td><td class="right " data-stat="pass_net_yds_per_att" >5.92</td><td class="right " data-stat="pass_adj_net_yds_per_att" >5.62</td><td class="right " data-stat="comebacks" >1</td><td class="right " data-stat="gwd" >1</td></tr>
 
-      
+
       <tr class="thead">
          <th aria-label="Rk" data-stat="ranker" class="ranker sort_default_asc show_partial_when_sorting center" data-tip="<b>Rank</b><br>This is a count of the rows from top to bottom.<br>It is recalculated following the sorting of a column." >Rk</th>
          <th aria-label="Player" data-stat="player" class=" sort_default_asc show_partial_when_sorting left" >Player</th>
@@ -986,7 +986,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
 <tr ><th scope="row" class="right " data-stat="ranker" csk="58" >58</th><td class="left " data-append-csv="GilbGa01" data-stat="player" csk="Gilbert,Garrett" ><a href="/players/G/GilbGa01.htm">Garrett Gilbert</a></td><td class="left " data-stat="team" ><a href="/teams/was/2021.htm" title="Washington Football Team">WAS</a></td><td class="right " data-stat="age" >30</td><td class="left " data-stat="pos" >qb</td><td class="right " data-stat="g" >1</td><td class="right " data-stat="gs" >1</td><td class="right " data-stat="qb_rec" csk="0.00000000000" >0-1-0</td><td class="right " data-stat="pass_cmp" >20</td><td class="right " data-stat="pass_att" >31</td><td class="right non_qual" data-stat="pass_cmp_perc" >64.5</td><td class="right " data-stat="pass_yds" >194</td><td class="right iz" data-stat="pass_td" >0</td><td class="right non_qual iz" data-stat="pass_td_perc" >0</td><td class="right iz" data-stat="pass_int" >0</td><td class="right non_qual iz" data-stat="pass_int_perc" >0</td><td class="right " data-stat="pass_first_down" >8</td><td class="right " data-stat="pass_long" >46</td><td class="right non_qual" data-stat="pass_yds_per_att" >6.3</td><td class="right non_qual" data-stat="pass_adj_yds_per_att" >6.3</td><td class="right non_qual" data-stat="pass_yds_per_cmp" >9.7</td><td class="right non_qual" data-stat="pass_yds_per_g" >194.0</td><td class="right non_qual" data-stat="pass_rating" >81.9</td><td class="right non_qual" data-stat="qbr" >39.6</td><td class="right " data-stat="pass_sacked" >2</td><td class="right " data-stat="pass_sacked_yds" >20</td><td class="right non_qual" data-stat="pass_sacked_perc" >6.1</td><td class="right non_qual" data-stat="pass_net_yds_per_att" >5.27</td><td class="right non_qual" data-stat="pass_adj_net_yds_per_att" >5.27</td><td class="right iz" data-stat="comebacks" ></td><td class="right iz" data-stat="gwd" ></td></tr>
 <tr ><th scope="row" class="right " data-stat="ranker" csk="59" >59</th><td class="left " data-append-csv="MannSe00" data-stat="player" csk="Mannion,Sean" ><a href="/players/M/MannSe00.htm">Sean Mannion</a></td><td class="left " data-stat="team" ><a href="/teams/min/2021.htm" title="Minnesota Vikings">MIN</a></td><td class="right " data-stat="age" >29</td><td class="left " data-stat="pos" >qb</td><td class="right " data-stat="g" >1</td><td class="right " data-stat="gs" >1</td><td class="right " data-stat="qb_rec" csk="0.00000000000" >0-1-0</td><td class="right " data-stat="pass_cmp" >22</td><td class="right " data-stat="pass_att" >36</td><td class="right non_qual" data-stat="pass_cmp_perc" >61.1</td><td class="right " data-stat="pass_yds" >189</td><td class="right " data-stat="pass_td" >1</td><td class="right non_qual" data-stat="pass_td_perc" >2.8</td><td class="right iz" data-stat="pass_int" >0</td><td class="right non_qual iz" data-stat="pass_int_perc" >0</td><td class="right " data-stat="pass_first_down" >8</td><td class="right " data-stat="pass_long" >30</td><td class="right non_qual" data-stat="pass_yds_per_att" >5.3</td><td class="right non_qual" data-stat="pass_adj_yds_per_att" >5.8</td><td class="right non_qual" data-stat="pass_yds_per_cmp" >8.6</td><td class="right non_qual" data-stat="pass_yds_per_g" >189.0</td><td class="right non_qual" data-stat="pass_rating" >84.1</td><td class="right non_qual" data-stat="qbr" >33.5</td><td class="right " data-stat="pass_sacked" >2</td><td class="right " data-stat="pass_sacked_yds" >15</td><td class="right non_qual" data-stat="pass_sacked_perc" >5.3</td><td class="right non_qual" data-stat="pass_net_yds_per_att" >4.58</td><td class="right non_qual" data-stat="pass_adj_net_yds_per_att" >5.11</td><td class="right iz" data-stat="comebacks" ></td><td class="right iz" data-stat="gwd" ></td></tr>
 
-      
+
       <tr class="thead">
          <th aria-label="Rk" data-stat="ranker" class="ranker sort_default_asc show_partial_when_sorting center" data-tip="<b>Rank</b><br>This is a count of the rows from top to bottom.<br>It is recalculated following the sorting of a column." >Rk</th>
          <th aria-label="Player" data-stat="player" class=" sort_default_asc show_partial_when_sorting left" >Player</th>
@@ -1051,7 +1051,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
 <tr ><th scope="row" class="right " data-stat="ranker" csk="88" >88</th><td class="left " data-append-csv="MondKe00" data-stat="player" csk="Mond,Kellen" ><a href="/players/M/MondKe00.htm">Kellen Mond</a></td><td class="left " data-stat="team" ><a href="/teams/min/2021.htm" title="Minnesota Vikings">MIN</a></td><td class="right " data-stat="age" >22</td><td class="left iz" data-stat="pos" ></td><td class="right " data-stat="g" >1</td><td class="right iz" data-stat="gs" >0</td><td class="right iz" data-stat="qb_rec" ></td><td class="right " data-stat="pass_cmp" >2</td><td class="right " data-stat="pass_att" >3</td><td class="right non_qual" data-stat="pass_cmp_perc" >66.7</td><td class="right " data-stat="pass_yds" >5</td><td class="right iz" data-stat="pass_td" >0</td><td class="right non_qual iz" data-stat="pass_td_perc" >0</td><td class="right iz" data-stat="pass_int" >0</td><td class="right non_qual iz" data-stat="pass_int_perc" >0</td><td class="right iz" data-stat="pass_first_down" >0</td><td class="right " data-stat="pass_long" >6</td><td class="right non_qual" data-stat="pass_yds_per_att" >1.7</td><td class="right non_qual" data-stat="pass_adj_yds_per_att" >1.7</td><td class="right non_qual" data-stat="pass_yds_per_cmp" >2.5</td><td class="right non_qual" data-stat="pass_yds_per_g" >5.0</td><td class="right non_qual" data-stat="pass_rating" >70.1</td><td class="right non_qual" data-stat="qbr" >14.9</td><td class="right iz" data-stat="pass_sacked" >0</td><td class="right iz" data-stat="pass_sacked_yds" >0</td><td class="right non_qual iz" data-stat="pass_sacked_perc" >0</td><td class="right non_qual" data-stat="pass_net_yds_per_att" >1.67</td><td class="right non_qual" data-stat="pass_adj_net_yds_per_att" >1.67</td><td class="right iz" data-stat="comebacks" ></td><td class="right iz" data-stat="gwd" ></td></tr>
 <tr ><th scope="row" class="right " data-stat="ranker" csk="89" >89</th><td class="left " data-append-csv="WolfJo00" data-stat="player" csk="Wolford,John" ><a href="/players/W/WolfJo00.htm">John Wolford</a></td><td class="left " data-stat="team" ><a href="/teams/ram/2021.htm" title="Los Angeles Rams">LAR</a></td><td class="right " data-stat="age" >26</td><td class="left iz" data-stat="pos" ></td><td class="right " data-stat="g" >3</td><td class="right iz" data-stat="gs" >0</td><td class="right iz" data-stat="qb_rec" ></td><td class="right " data-stat="pass_cmp" >1</td><td class="right " data-stat="pass_att" >4</td><td class="right non_qual" data-stat="pass_cmp_perc" >25</td><td class="right " data-stat="pass_yds" >5</td><td class="right iz" data-stat="pass_td" >0</td><td class="right non_qual iz" data-stat="pass_td_perc" >0</td><td class="right " data-stat="pass_int" >1</td><td class="right non_qual" data-stat="pass_int_perc" >25</td><td class="right iz" data-stat="pass_first_down" >0</td><td class="right " data-stat="pass_long" >5</td><td class="right non_qual" data-stat="pass_yds_per_att" >1.3</td><td class="right non_qual" data-stat="pass_adj_yds_per_att" >-10.0</td><td class="right non_qual" data-stat="pass_yds_per_cmp" >5.0</td><td class="right non_qual" data-stat="pass_yds_per_g" >1.7</td><td class="right non_qual iz" data-stat="pass_rating" >0.0</td><td class="right non_qual" data-stat="qbr" >0.1</td><td class="right " data-stat="pass_sacked" >1</td><td class="right " data-stat="pass_sacked_yds" >8</td><td class="right non_qual" data-stat="pass_sacked_perc" >20</td><td class="right non_qual" data-stat="pass_net_yds_per_att" >-0.60</td><td class="right non_qual" data-stat="pass_adj_net_yds_per_att" >-9.60</td><td class="right iz" data-stat="comebacks" ></td><td class="right iz" data-stat="gwd" ></td></tr>
 
-      
+
       <tr class="thead">
          <th aria-label="Rk" data-stat="ranker" class="ranker sort_default_asc show_partial_when_sorting center" data-tip="<b>Rank</b><br>This is a count of the rows from top to bottom.<br>It is recalculated following the sorting of a column." >Rk</th>
          <th aria-label="Player" data-stat="player" class=" sort_default_asc show_partial_when_sorting left" >Player</th>
@@ -1121,11 +1121,11 @@ var sr_menus_checkInfoCookie_run_inline = true;
 
 </div>
 
-            
-            
-            
-         
-      
+
+
+
+
+
 
 <!-- global.nonempty_tables_num: 1, table_count: 1 -->
    <!-- no Local/Partials/NoteBottom.tt2 -->
@@ -1219,7 +1219,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
           <li><a href="/years/2021/12_transactions.htm">December</a></li>
         </ul></div></div>
 
-   
+
 
 
 <!-- fs_footer -->
@@ -1257,16 +1257,16 @@ var sr_menus_checkInfoCookie_run_inline = true;
 
 	<div id="footer_general">
 		<div id="site_menu" role="navigation" aria-label="complete site index">
-			
-			
+
+
 <div class="section_heading assoc_site_menu" id="site_menu_sh">
   <span class="section_anchor" id="site_menu_link" data-label="Full Site Menu"></span><h2>Full Site Menu</h2>    <div class="section_heading_text">
       <ul><li><a data-scroll href="#header">Return to Top</a></li>
       </ul>
     </div>
-    		
+
 </div>
-			
+
 				    <ul>
 	<li><a href="/players">Players</a>
 	    <div>In the News: <a title="Deebo Samuel" href="/players/S/SamuDe00.htm">Deebo Samuel</a>, <a title="Trey Lance" href="/players/L/LancTr00.htm">Trey Lance</a>, <a title="Jimmy Garoppolo" href="/players/G/GaroJi00.htm">Jimmy Garoppolo</a>, <a title="Tom Brady" href="/players/B/BradTo00.htm">Tom Brady</a>, <a title="Deshaun Watson" href="/players/W/WatsDe00.htm">Deshaun Watson</a>, <a title="Aaron Rodgers" href="/players/R/RodgAa00.htm">Aaron Rodgers</a> <a href="/players/">...</a></div>
@@ -1347,13 +1347,13 @@ var sr_menus_checkInfoCookie_run_inline = true;
   </li>
 	</ul>
 
-			
+
 		</div><!-- div#site_menu -->
 		<div>
 			<div id="social" class="icon_group noload">
-	
+
 <div class="section_heading assoc_" id="_sh">
-  <span class="section_anchor" id="_link" data-label="We're Social...for Statheads" data-no-inpage="1"></span><h2>We're Social...for Statheads</h2>		
+  <span class="section_anchor" id="_link" data-label="We're Social...for Statheads" data-no-inpage="1"></span><h2>We're Social...for Statheads</h2>
 </div>
 	<a href="tel://888-512-8907" data-tip="Call us on Telephone" data-label="Telephone" aria-label="Telephone" class="poptip"><svg class="icon phone"><use xlink:href="#ic-phone"></use></svg></a>
 	<a href="//www.sports-reference.com/blog/" data-tip="The Sports Reference Blog" data-label="Our Blog" aria-label="Our Blog" class="poptip"><svg class="icon wordpress"><use xlink:href="#ic-wordpress"></use></svg></a>
@@ -1382,9 +1382,9 @@ var sr_menus_checkInfoCookie_run_inline = true;
 </div><!-- div#social -->
 
 			<div id="tips_tricks">
-   
+
 <div class="section_heading assoc_tips" id="tips_sh">
-  <span class="section_anchor" id="tips_link" data-label="FAQs, Tip &amp; Tricks" data-no-inpage="1"></span><h2>FAQs, Tip &amp; Tricks</h2>		
+  <span class="section_anchor" id="tips_link" data-label="FAQs, Tip &amp; Tricks" data-no-inpage="1"></span><h2>FAQs, Tip &amp; Tricks</h2>
 </div>
    <ul>
 <li>Learn about the <a href="https://www.pro-football-reference.com/blog/index37a8.html">Approximate Value Formula</a></li>
@@ -1402,16 +1402,16 @@ var sr_menus_checkInfoCookie_run_inline = true;
 				<p>All logos are the trademark &amp; property of their owners and not Sports Reference LLC.  We present them here for purely educational purposes.
 				<a href="https://www.sports-reference.com/blog/2016/06/redesign-team-and-league-logos-courtesy-sportslogos-net/">Our reasoning for presenting offensive logos.</a></p>
 				<p>
-					
+
 					Logos were compiled by the amazing <a href="http://sportslogos.net/">SportsLogos.net.</a>
 				</p>
-				
+
 <div class="notice">
 <p>Data Provided By
 	<a href="https://www.sportradar.com/" rel="nofollow"><img alt="SportRadar" border=0 width=275 src="https://d2p3bygnnzw9w3.cloudfront.net/req/202207051/images/klecko/sportradar.png"  style="background-color:#666; padding:.5em; border-radius:.25em"></a>
 	</p>
-	
-	
+
+
 </div>
 
      <p>Copyright &copy; 2000-2022 <a href="//www.sports-reference.com/">Sports Reference LLC</a>. All rights reserved.</p>
@@ -1431,9 +1431,9 @@ var sr_menus_checkInfoCookie_run_inline = true;
 	<li><a href="https://www.hockey-reference.com/">Hockey</a></li>
 
 
-	
-	
-	
+
+
+
 	<li><a href="https://fbref.com/pt/">Futebol</a></li>
 
 	<li><a href="https://www.sports-reference.com/blog/">Blog</a></li>
@@ -1460,7 +1460,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
 </div><!-- div#wrap -->
 <!-- yes sticky url:  https://www.pro-football-reference.com/years/2021/passing.htm -->
 <div id="fs-select-footer"></div>
-      
+
 
 
 
