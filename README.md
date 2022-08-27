@@ -5,6 +5,11 @@
 - This will keep my python skills more up to date and won't allow them to get quite as rusty.
 - I will use python notebooks for initially testing out my code but will then refactor it into proper divided modules.
 - Maybe turn this into a CLI?  Or I could use it as a back end.
+
+## Plan
+1. Using the `schedule` library I want to have a scraper run on the ESPN weekly football scores.
+2. With these scores, I will scrape each game for each players accrued statistics from the box score
+3. These will be parsed and stored in my local mongo db server to be accessed in a node application
 ## Setup
 1. This project is coded using `Python 3.10.5`.  Visit the [Python download page](https://www.python.org/downloads/) to install the correct version or use your installed python versioning tool to switch to this version.
 2. For best results, use a python virtual environment (optional)
