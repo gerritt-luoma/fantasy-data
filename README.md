@@ -7,7 +7,9 @@
 - Maybe turn this into a CLI?  Or I could use it as a back end.
 
 ## Plan
-1. Using the `schedule` library I want to have a scraper run on the ESPN weekly football scores.
+1. Using the `schedule` library I want to have a scraper run on the PFR weekly football scores.
+   1. Using PFR will be very useful.  This is because they have basic stats as well as advanced stats like ADOT and air yards
+   2. This is also useful because they don't hide their data like ESPN making it much easier to scrape.
 2. With these scores, I will scrape each game for each players accrued statistics from the box score
 3. These will be parsed and stored in my local mongo db server to be accessed in a node application
 ## Setup
