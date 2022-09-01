@@ -1,6 +1,6 @@
-import json
-import re
 import requests
+
+# TODO: Add a headers object to my requests to mimic requests coming from a regular computer instead of a python request
 
 def get(url: str) -> requests.Response:
     retval = None
