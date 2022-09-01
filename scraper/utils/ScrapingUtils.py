@@ -1,4 +1,3 @@
-from msilib.schema import tables
 from bs4 import BeautifulSoup, Comment
 
 def getSoup(content):
