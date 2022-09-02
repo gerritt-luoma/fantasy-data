@@ -29,5 +29,7 @@ def getStatTables(gamePage):
     statTables = None
     if gamePageSoup:
         statTables = gamePageSoup.find_all('div', { 'class': 'table_wrapper'})
-        statTables = [table['id'] for table in statTables]
     return statTables
+
+def getTableByName(name, tables):
+    return next((table for table in tables if table['id'] == name), None)
