@@ -4,7 +4,7 @@
 - I want to use this as a project to add to whenever I get that random inspiration.
 - This will keep my python skills more up to date and won't allow them to get quite as rusty.
 - I will use python notebooks for initially testing out my code but will then refactor it into proper divided modules.
-- Maybe turn this into a CLI?  Or I could use it as a back end.
+- Use this application only to scrape the data.  I will build out an API using express and Typescript to handle working with the mongodb server which the scraper will then send post requests to.
 
 ## Plan
 1. Using the `schedule` library I want to have a scraper run on the PFR weekly football scores.
@@ -12,16 +12,18 @@
    2. This is also useful because they don't hide their data like ESPN making it much easier to scrape.
 2. With these scores, I will scrape each game for each players accrued statistics from the box score
 3. These will be parsed and stored in my local mongo db server to be accessed in a node application
+
+## TODO
+- [ ] Add headers to requests to better mock an actual user/computer
+- [ ] Continue building out the scraper
+- [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
 ## Setup
-1. This project is coded using `Python 3.10.5`.  Visit the [Python download page](https://www.python.org/downloads/) to install the correct version or use your installed python versioning tool to switch to this version.
-2. For best results, use a python virtual environment (optional)
+1. Clone this repository and cd into the directory
+2. To run this project it is recommended to use Docker.  After installing the Docker desktop application or docker on the CLI, run:
    ```
-   $ python3 -m pip3 install --user virtualenv
-   $ python3 -m virtualenv <envirnoment name of your choice>
-   $ source <env name>/bin/activate
+   $ docker build -t fantasy-data-scraper .
    ```
-3. Install all needed dependencies
+3. Once the build completes, run the container
    ```
-   $ python -m pip install -r requirements.txt
+   $ docker run fantasy-data-scraper
    ```
-4. If running testing notebooks, there may be some unaccounted for steps depending on your machine.  I am using VSCode with the Jupyter notebooks extension so I am able to select my virtual environment as my interpreter.
