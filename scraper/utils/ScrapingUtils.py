@@ -10,7 +10,7 @@ def getSoup(content):
         print("There was an error converting content to soup")
     return contentSoup
 
-def getWeeklyGames(gamesPage):
+def getWeeklyGameLinks(gamesPage):
     gamesPageSoup = getSoup(gamesPage)
     gamesLinks = None
     if gamesPageSoup:
@@ -25,6 +25,13 @@ def getWeeklyGames(gamesPage):
             else:
                 print('Could not extract link')
     return gamesLinks
+
+def getTeamNames(gamePage):
+    gamePageSoup = getSoup(gamePage)
+    title = gamePageSoup.title.string
+    teams = title.split(' - ')[0]
+    away, home = teams.split(' at ')
+    return home, away
 
 def getStatTableDivs(gamePage):
     gamePageSoup = getSoup(gamePage)
@@ -144,4 +151,3 @@ def scrapeAdvancedTable(head, body, statName, offenseList):
                 statDict[key] = value
             player = findPlayerById(playerID, offenseList)
             player[statName] = statDict
-            print(json.dumps(player, indent=2, sort_keys=True))
