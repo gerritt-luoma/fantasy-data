@@ -15,8 +15,9 @@
 
 ## TODO
 - [ ] Add headers to requests to better mock an actual user/computer
-- [ ] Continue building out the scraper
+- [ ] Find way to easily determine which week of the season it is
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
+- [x] Continue building out the scraper
 ## Setup
 1. Clone this repository and cd into the directory
 2. To run this project it is recommended to use Docker.  After installing the Docker desktop application or docker on the CLI, run:
