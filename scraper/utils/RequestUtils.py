@@ -1,11 +1,15 @@
 import requests
 
-# TODO: Add a headers object to my requests to mimic requests coming from a regular computer instead of a python request
+headers = {
+    'accept': 'application/json, text/plain, */*',
+    'origin': 'https://www.pro-football-reference.com',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+}
 
 def get(url: str) -> requests.Response:
     retval = None
     try:
-        resp = requests.get(url)
+        resp = requests.get(url, headers=headers)
         if resp.status_code == 200:
             retval = resp
         else:
