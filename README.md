@@ -14,10 +14,11 @@
 3. These will be parsed and stored in my local mongo db server to be accessed in a node application
 
 ## TODO
-- [ ] Add headers to requests to better mock an actual user/computer
 - [ ] Find way to easily determine which week of the season it is
+- [ ] Fix port binding connection between mongodb and container on rpi
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
 - [x] Continue building out the scraper
+- [x] Add headers to requests to better mock an actual user/computer
 ## Setup
 1. Clone this repository and cd into the directory
 2. To run this project it is recommended to use Docker.  After installing the Docker desktop application or docker on the CLI, run:
