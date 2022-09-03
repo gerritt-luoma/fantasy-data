@@ -1,6 +1,11 @@
 from bs4 import BeautifulSoup, Comment
 import hashlib
+"""
+    A collection of utility functions used for scraping the weekly game statistics from PFR
+"""
 
+# getSoup takes raw html as an input attempts to parse it with BeautifulSoup, and returns the result
+# If the result is a failure, it is none
 def getSoup(content):
     contentSoup = None
     try:
@@ -9,6 +14,8 @@ def getSoup(content):
         print("There was an error converting content to soup")
     return contentSoup
 
+# getWeeklyGameLinks takes the raw html of the weekly games page from PFR
+# and finds all of the links to the individual game box scores.  Returns a list of links if successful, else none
 def getWeeklyGameLinks(gamesPage):
     gamesPageSoup = getSoup(gamesPage)
     gamesLinks = None
@@ -25,6 +32,7 @@ def getWeeklyGameLinks(gamesPage):
                 print('Could not extract link')
     return gamesLinks
 
+# getTeamNames takes the singlular game page html and finds the team names from the title of the page
 def getTeamNames(gamePage):
     gamePageSoup = getSoup(gamePage)
     title = gamePageSoup.title.string
@@ -32,6 +40,7 @@ def getTeamNames(gamePage):
     away, home = teams.split(' at ')
     return home, away
 
+# getStatTableDivs takes in the raw game page html and returns a list of the divs containing all stat tables
 def getStatTableDivs(gamePage):
     gamePageSoup = getSoup(gamePage)
     statTableDivs = None
@@ -39,9 +48,11 @@ def getStatTableDivs(gamePage):
         statTableDivs = gamePageSoup.find_all('div', { 'class': 'table_wrapper'})
     return statTableDivs
 
+# getTableByName searches the inputted list for a table containing an id matching the inputted id
 def getTableByName(name, tables):
     return next((table for table in tables if table['id'] == name), None)
 
+# getTableHeadAndBody takes in the table div of a stat and extracts the thead and tbody of the table
 def getTableHeadAndBody(tableDiv):
     fullTable = tableDiv.find('table')
 
@@ -49,6 +60,7 @@ def getTableHeadAndBody(tableDiv):
     tableBody = fullTable.find('tbody')
     return tableHead, tableBody
 
+# getBasicOverHeaderCounts is used for the basic stats to keep track of what stats fall under what category.  Returns 5 integers
 def getBasicOverHeaderCounts(head):
     overheader = head.find_all('tr')[0].find_all('th')
     colCounts = [int(col['colspan']) for col in overheader]
@@ -59,19 +71,25 @@ def getBasicOverHeaderCounts(head):
     numFumbles = sum(colCounts)
     return numInfo, numPassing, numRushing, numReceiving, numFumbles
 
+# getStatKeys iterates through the head of the table and retrieves the name of each statistic storing them in a list
 def getStatKeys(head):
     stats = head.find_all('tr')[-1].find_all('th')
     statKeys = [stat.text.lower() for stat in stats]
     return statKeys
 
+# getPlayerId grabs the link from the name cell and hashes it using md5.  This is to ensure we have unique player ids
+# in the event of repeated names like "Mike Smith"
 def getPlayerId(cell):
     atag = cell.find('a')
     link = atag['href']
     return hashlib.md5(link.encode()).hexdigest()
 
+# findPlayerById searches the inputted list of players to find a player with a matching id
 def findPlayerById(id, players):
     return next((player for player in players if player['player_id'] == id), None)
 
+# convertStatIfNecessary takes in the text of a stat cell.  If it is empty, change to a '0'.
+# Strip all % signs and convert to float/integer if necessary
 def convertStatIfNecessary(stat):
     if stat == '':
         stat = '0'
@@ -82,7 +100,9 @@ def convertStatIfNecessary(stat):
             stat = int(stat)
     return stat
 
-
+# scrapeBasicOffense is used to scrape the table containing all basic stats of
+# passing, receiving, rushing, and fumbles as well as pulling the names of the players
+# returns a list of dictionaries containing the scraped info
 def scrapeBasicOffense(head, body):
     # Absolutely YUUUUUGE function.  Could potentially break it down
 
@@ -124,10 +144,13 @@ def scrapeBasicOffense(head, body):
             offenseList.append(player)
     return offenseList
 
+# getAdvancedTableFromComment is used to pull the advanced tables from within comment tags in the html
+# PFR thinks they're slick by just hiding the data within the comments if you aren't a paid user lmao
 def getAdvancedTableFromComment(tableDiv):
     table = tableDiv.find(text=lambda text:isinstance(text, Comment))
     return BeautifulSoup(table, 'html.parser')
 
+# scrapeAdvancedTable is used to scrape the advanced statistics tables and add the advanced data to the matching players
 def scrapeAdvancedTable(head, body, statName, offenseList):
     statKeys = getStatKeys(head)
 
