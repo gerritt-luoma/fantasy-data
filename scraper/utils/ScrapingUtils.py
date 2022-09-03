@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup, Comment
 import hashlib
-import json
 
 def getSoup(content):
     contentSoup = None
