@@ -12,7 +12,8 @@ def getDataBase():
 
 def writeToDatabase(week, data):
     db = getDataBase()
-    collection = db[f'week_{week}']
+    year = db['2021']
+    collection = year[f'week_{week}']
 
     try:
         collection.insert_many(data)

@@ -1,5 +1,6 @@
 from utils import ScrapingUtils
 from utils import RequestUtils
+from utils import DBUtils
 import time
 from datetime import date
 import json
@@ -45,17 +46,19 @@ def scrapeStats():
     # week = determineWeek()
     # weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
     # weekPage = RequestUtils.getContent(weeklyURL)
-
+    week = 1
     weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
     gameLinks = ScrapingUtils.getWeeklyGameLinks(weekPage)
 
     weekList = []
 
-    for game in gameLinks:
+    for i, game in enumerate(gameLinks):
+        print(f'Scraping game #{i}')
         scrapedGame = scrapeGame(game)
         print(json.dumps(scrapedGame, indent=2, sort_keys=True))
 
         weekList.append(scrapedGame)
 
-        # Sleep for 5 second so I don't get banned lmao
-        time.sleep(5)
+        # Sleep for 3 second so I don't get banned lmao
+        time.sleep(3)
+    DBUtils.writeToDatabase(week, weekList)

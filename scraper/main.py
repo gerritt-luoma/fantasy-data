@@ -14,4 +14,4 @@ def main():
 
 
     # Testing ground
-    DBUtils.tryConnecting()
+    WeeklyScraper.scrapeStats()
