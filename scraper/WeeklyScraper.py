@@ -1,6 +1,7 @@
 from utils import ScrapingUtils
 from utils import RequestUtils
 import time
+from datetime import date
 import json
 
 baseURL = 'https://www.pro-football-reference.com/'
@@ -32,15 +33,24 @@ def scrapeGame(gameLink):
     }
     return gameDict
 
+def determineWeek():
+    startDate = date(2022, 9, 6)
+    todaysDate = date.today()
+    daysDifference = todaysDate - startDate
+    numWeeks = daysDifference // 7
+    return numWeeks
+
 def scrapeStats():
-    # TODO: Determine best way to find how many weeks it's been since the start of the season
-    # for now, just testing with week 1 of 2021
+    # will use this once the container is actually running
+    # week = determineWeek()
+    # weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
+    # weekPage = RequestUtils.getContent(weeklyURL)
 
     weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
     gameLinks = ScrapingUtils.getWeeklyGameLinks(weekPage)
 
     weekList = []
-    
+
     for game in gameLinks:
         scrapedGame = scrapeGame(game)
         print(json.dumps(scrapedGame, indent=2, sort_keys=True))
