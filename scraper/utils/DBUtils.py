@@ -1,7 +1,20 @@
 from pymongo import MongoClient
 import os
 
+def getDataBase():
+    db = None
+    try:
+        client = MongoClient(f'mongodb://{os.getenv("MONGODB_USERNAME")}:{os.getenv("MONGODB_PASSWORD")}@mongoservice:27017/?authSource=admin')
+        db = client.fantasy_data
+    except:
+        print('failed to connect to db')
+    return db
 
-# Just testing for now.  My container does NOT want to work with mongodb
-def tryConnecting():
-    client = MongoClient(f'mongodb://{os.environ.get("MONGODB_USERNAME")}:{os.environ.get("MONGODB_PASSWORD")}@localhost:27017/')
+def writeToDatabase(week, data):
+    db = getDataBase()
+    collection = db[f'week_{week}']
+
+    try:
+        collection.insert_many(data)
+    except:
+        print('failed to write to database')
