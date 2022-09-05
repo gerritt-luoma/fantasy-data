@@ -4,3 +4,4 @@ testing-notebooks
 venv
 README.md
 .gitignore
+__pycache__
