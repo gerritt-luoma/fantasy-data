@@ -61,4 +61,4 @@ def scrapeStats():
 
         # Sleep for 3 second so I don't get banned lmao
         time.sleep(3)
-    DBUtils.writeToDatabase(week, weekList)
+    #DBUtils.writeToDatabase(week, weekList)

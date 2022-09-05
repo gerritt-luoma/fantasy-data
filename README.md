@@ -14,11 +14,11 @@
 3. These will be parsed and stored in my local mongo db server to be accessed in a node application
 
 ## TODO
-- [ ] Alter scraping to only add fields that contain values.  (Ex. Wide receivers that don't have passing stats should not have passing data stored)
 - [ ] **MAJOR**: Add better error checking for scraping. Right now it's mostly just "trust me bro it works" but I **will** run into an issue eventually that will cause major problems.
 - [ ] Should set up actual logging
 - [ ] Think of way to inform me of if there was a scraping error?  Like send me an email or a message or something?
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
+- [x] Alter scraping to only add fields that contain values.  (Ex. Wide receivers that don't have passing stats should not have passing data stored)
 - [x] Fix dotenv not loading user and password from .env in docker container
 - [x] Fix port binding connection between mongodb and container on rpi
 - [x] Continue building out the scraper

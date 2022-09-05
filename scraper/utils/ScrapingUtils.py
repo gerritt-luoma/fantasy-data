@@ -111,10 +111,15 @@ def scrapeBasicOffense(head, body):
 
     statKeys = getStatKeys(head)
 
+    # Find all rows of the basic stat table and initialize the output list
     bodyRows = body.find_all('tr')
     offenseList = []
+
+    # Iterate through each row to gather player stats
     for row in bodyRows:
+        # There are some rows that contain unnecessary data.  These rows contain a class while the rest do not.
         if not row.has_attr('class'):
+            # Find all th and trs
             cells = row.find_all(recursive=False)
             player = {
                 'info': {},
@@ -123,6 +128,8 @@ def scrapeBasicOffense(head, body):
                 'receiving': {},
                 'fumbles': {}
             }
+
+            # To properly sort all stats to the correct dict I need to do some counting magic
             count = 0
             for stat, cell in zip(statKeys, cells):
                 value = convertStatIfNecessary(cell.text)
@@ -141,6 +148,16 @@ def scrapeBasicOffense(head, body):
                 else:
                     print(f'Should never get here.\nstat: {stat}, value: {value}')
                 count += 1
+            
+            # To save up on storage space I should remove all sub dicts that only contain 0
+            # Probably a pretty choppy way of doing this.  May want to refactor in the future
+            for key in player.copy():
+                if key != 'player_id' and key != 'info':
+                    allZeros = all(value == 0 for value in player[key].values())
+                    if allZeros:
+                        del player[key]
+
+            # Add player to the output
             offenseList.append(player)
     return offenseList
 
@@ -152,24 +169,32 @@ def getAdvancedTableFromComment(tableDiv):
 
 # scrapeAdvancedTable is used to scrape the advanced statistics tables and add the advanced data to the matching players
 def scrapeAdvancedTable(head, body, statName, offenseList):
+    # Get the keys for all stats in the advanced table
     statKeys = getStatKeys(head)
 
+    # Find all rows and iterate through
     rows = body.findAll('tr')
     for row in rows:
+        # Same as basic table.  There are unnecessary rows in the body that need to be removed.
         if not row.has_attr('class'):
             count = 0
             statDict = {}
             playerID = None
             stats = row.findAll(recursive=False)
 
+            # Iterate through each stat in the row
             for key, stat in zip(statKeys, stats):
+                # If count == 0 we know the player link is in this cell.  Use this cell to get the player id
                 if count == 0:
                     playerID = getPlayerId(stat)
+
+                # The first two cells in each row is the name and team abbreviation.  Skip these.
                 if count < 2:
                     count += 1
                     continue
 
                 value = convertStatIfNecessary(stat.text)
                 statDict[key] = value
+            # Get pointer to player dictionary in offense list and add new stat dict to list
             player = findPlayerById(playerID, offenseList)
             player[statName] = statDict
