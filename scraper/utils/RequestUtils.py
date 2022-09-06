@@ -1,4 +1,5 @@
 import requests
+import logging
 
 # headers to mock an actual request instead of it being a python requests request
 headers = {
@@ -35,8 +36,15 @@ def getJSON(url: str):
 # getContent hits the specified url and returns the comment if it was a success.  none if not
 def getContent(url: str):
     contentVal = None
-    resp = get(url)
+    resp = None
+    try:
+        resp = get(url)
+    except:
+        logging.error(f'Failed to get requested url: {url}')
+        logging.exception('')
     if resp != None:
         contentVal = resp.content
+    else:
+        raise Exception('contentVal cannot be None')
     return contentVal
 

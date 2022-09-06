@@ -4,19 +4,43 @@ from utils import DBUtils
 import time
 from datetime import date
 import json
+import logging
 
 baseURL = 'https://www.pro-football-reference.com/'
 
 advancedTableNames = ['all_passing_advanced', 'all_rushing_advanced', 'all_receiving_advanced']
 
 def scrapeGame(gameLink):
-    gamePage = RequestUtils.getContent(f'{baseURL}{gameLink}')
-    #homeTeam, awayTeam = 
-    homeTeam, awayTeam = ScrapingUtils.getTeamNames(gamePage)
-    statTableDivs = ScrapingUtils.getStatTableDivs(gamePage)
+    gamePage = None
+    homeTeam, awayTeam = None, None
+    statTableDivs = None
+
+    # Try to get the gamePage
+    try:
+        gamePage = RequestUtils.getContent(f'{baseURL}{gameLink}')
+    except:
+        logging.error('Failed to get game page')
+        logging.exception('')
+        # Failed to get game page.  Exit out of function.
+        return
+
+    # Attempt to get team names
+    try:
+        homeTeam, awayTeam = ScrapingUtils.getTeamNames(gamePage)
+        logging.info(f'Now scraping {awayTeam} at {homeTeam}')
+    except:
+        logging.error('Failed to get team names')
+        logging.exception('')
+        # Failed to get team names. Exit out of function.
+        return
+
+    # Attempt to get the stat table divs
+    try:
+        statTableDivs = ScrapingUtils.getStatTableDivs(gamePage)
+    except:
+        logging.error('Failed to get stat table divs')
     basicScoringTable = ScrapingUtils.getTableByName('all_player_offense', statTableDivs)
     head, body = ScrapingUtils.getTableHeadAndBody(basicScoringTable)
-
     offenseList = ScrapingUtils.scrapeBasicOffense(head, body)
 
     for tableName in advancedTableNames:
@@ -35,10 +59,15 @@ def scrapeGame(gameLink):
     return gameDict
 
 def determineWeek():
-    startDate = date(2022, 9, 6)
-    todaysDate = date.today()
-    daysDifference = todaysDate - startDate
-    numWeeks = daysDifference // 7
+    numWeeks = None
+    try:
+        startDate = date(2022, 9, 6)
+        todaysDate = date.today()
+        daysDifference = todaysDate - startDate
+        numWeeks = daysDifference // 7
+    except:
+        logging.error('Failed to calculate number of weeks into season')
+        logging.exception('')
     return numWeeks
 
 def scrapeStats():
@@ -46,6 +75,8 @@ def scrapeStats():
     # week = determineWeek()
     # weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
     # weekPage = RequestUtils.getContent(weeklyURL)
+    logging.error('This is an error in a different file')
+    return
     week = 1
     weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
     gameLinks = ScrapingUtils.getWeeklyGameLinks(weekPage)
