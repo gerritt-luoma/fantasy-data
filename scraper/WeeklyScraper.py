@@ -78,35 +78,45 @@ def scrapeGame(gameLink):
 
 def determineWeek():
     numWeeks = None
-    try:
-        startDate = date(2022, 9, 6)
-        todaysDate = date.today()
-        daysDifference = todaysDate - startDate
-        numWeeks = daysDifference // 7
-    except:
-        logging.error('Failed to calculate number of weeks into season')
-        logging.exception('')
+    startDate = date(2022, 9, 6)
+    todaysDate = date.today()
+    daysDifference = todaysDate - startDate
+    numWeeks = daysDifference // 7
     return numWeeks
 
 def scrapeStats():
     # will use this once the container is actually running
-    # week = determineWeek()
-    # weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
-    # weekPage = RequestUtils.getContent(weeklyURL)
-    logging.error('This is an error in a different file')
-    return
+    # Determine week of the season
+    try:
+        week = determineWeek()
+        weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
+        weekPage = RequestUtils.getContent(weeklyURL)
+    except:
+        logging.error('Failed to get the week page')
+        logging.exception('')
+        # Failed to get week page. Cannot scrape games. No point in continuing.
+        return
+
+    # Testing data for now
     week = 1
     weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
-    gameLinks = ScrapingUtils.getWeeklyGameLinks(weekPage)
+
+    try:
+        gameLinks = ScrapingUtils.getWeeklyGameLinks(weekPage)
+    except:
+        logging.error('Failed to gather liks for the games')
+        logging.exception('')
+        # Can't access individual games.  Exit from function
+        return
 
     weekList = []
 
     for i, game in enumerate(gameLinks):
-        print(f'Scraping game #{i}')
+        logging.info(f'Scraping game #{i+1} for week ${week}')
         scrapedGame = scrapeGame(game)
-        print(json.dumps(scrapedGame, indent=2, sort_keys=True))
 
-        weekList.append(scrapedGame)
+        if scrapedGame:
+            weekList.append(scrapedGame)
 
         # Sleep for 3 second so I don't get banned lmao
         time.sleep(3)
