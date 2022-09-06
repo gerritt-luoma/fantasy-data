@@ -14,6 +14,9 @@ def scrapeGame(gameLink):
     gamePage = None
     homeTeam, awayTeam = None, None
     statTableDivs = None
+    basicScoringTable = None
+    head, body = None
+    offenseList = None
 
     # Try to get the gamePage
     try:
@@ -22,7 +25,7 @@ def scrapeGame(gameLink):
         logging.error('Failed to get game page')
         logging.exception('')
         # Failed to get game page.  Exit out of function.
-        return
+        return None
 
     # Attempt to get team names
     try:
@@ -32,24 +35,39 @@ def scrapeGame(gameLink):
         logging.error('Failed to get team names')
         logging.exception('')
         # Failed to get team names. Exit out of function.
-        return
+        return None
 
     # Attempt to get the stat table divs
     try:
         statTableDivs = ScrapingUtils.getStatTableDivs(gamePage)
     except:
         logging.error('Failed to get stat table divs')
-    basicScoringTable = ScrapingUtils.getTableByName('all_player_offense', statTableDivs)
-    head, body = ScrapingUtils.getTableHeadAndBody(basicScoringTable)
-    offenseList = ScrapingUtils.scrapeBasicOffense(head, body)
+        logging.exception('')
+        # Failed to get the stat divs.  Exit from function
+        return None
+
+    # Scrape the basic table to the offense list
+    try:
+        basicScoringTable = ScrapingUtils.getTableByName('all_player_offense', statTableDivs)
+        head, body = ScrapingUtils.getTableHeadAndBody(basicScoringTable)
+        offenseList = ScrapingUtils.scrapeBasicOffense(head, body)
+    except:
+        logging.error('Failed to scrape the basic scoring table')
+        logging.exception('')
+        # Failed to scrape the basic scoring table.  Exit from function
 
     for tableName in advancedTableNames:
-        advancedStatTableDiv = ScrapingUtils.getTableByName(tableName, statTableDivs)
-        advancedStatTable = ScrapingUtils.getAdvancedTableFromComment(advancedStatTableDiv)
-        head, body = ScrapingUtils.getTableHeadAndBody(advancedStatTable)
+        try:
+            advancedStatTableDiv = ScrapingUtils.getTableByName(tableName, statTableDivs)
+            advancedStatTable = ScrapingUtils.getAdvancedTableFromComment(advancedStatTableDiv)
+            head, body = ScrapingUtils.getTableHeadAndBody(advancedStatTable)
 
-        statName = tableName.replace('all_', '')
-        ScrapingUtils.scrapeAdvancedTable(head, body, statName, offenseList)
+            statName = tableName.replace('all_', '')
+            ScrapingUtils.scrapeAdvancedTable(head, body, statName, offenseList)
+        except:
+            logging.error(f'Failed to scrape the {statName} table')
+            logging.exception('')
+            return None
 
     gameDict = {
         'home': homeTeam,
