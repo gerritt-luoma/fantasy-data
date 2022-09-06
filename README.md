@@ -34,5 +34,5 @@
    ```
 3. Once the build completes, run the container
    ```
-   $ docker run --add-host=mongoservice:172.17.0.1 fantasy-data-scraper
+   $ docker run --add-host=mongoservice:172.17.0.1 -v ~/logs:/usr/logs/ fantasy-data-scraper
    ```
