@@ -1,6 +1,6 @@
 from utils import ScrapingUtils
 from utils import RequestUtils
-from utils import DBUtils
+from utils.DBUtils import DBUtils
 import time
 from datetime import date
 import json
@@ -111,6 +111,11 @@ def scrapeStats():
 
     weekList = []
 
+    dbUtils = DBUtils()
+    if False == dbUtils.connect():
+        # We failed to connect to db
+        return
+
     for i, game in enumerate(gameLinks):
         logging.info(f'Scraping game #{i+1} for week ${week}')
         scrapedGame = scrapeGame(game)
@@ -120,4 +125,6 @@ def scrapeStats():
 
         # Sleep for 3 second so I don't get banned lmao
         time.sleep(3)
-    #DBUtils.writeToDatabase(week, weekList)
+    
+    dbUtils.writeToDatabase(week, weekList)
+    dbUtils.disconnect()
