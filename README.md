@@ -16,6 +16,7 @@
 ## TODO
 - [ ] **MAJOR**: Add better error checking for scraping. Right now it's mostly just "trust me bro it works" but I **will** run into an issue eventually that will cause major problems.
 - [ ] Should set up actual logging
+- [ ] Refactor DBUtils.py to take a class approach.  This way I can connect **ONCE** before scraping instead of connecting every time I try to write to the db.
 - [ ] Think of way to inform me of if there was a scraping error?  Like send me an email or a message or something?
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
 - [x] Alter scraping to only add fields that contain values.  (Ex. Wide receivers that don't have passing stats should not have passing data stored)
