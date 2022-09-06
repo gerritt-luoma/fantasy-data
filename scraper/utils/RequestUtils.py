@@ -16,9 +16,9 @@ def get(url: str) -> requests.Response:
         if resp.status_code == 200:
             retval = resp
         else:
-            print("Response did not have a code of 200")
+            logging.error("Response did not have a code of 200")
     except:
-        print("Error fetching url")
+        logging.error("Could not fetch url")
 
     return retval
 

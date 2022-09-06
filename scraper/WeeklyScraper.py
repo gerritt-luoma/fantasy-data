@@ -15,7 +15,7 @@ def scrapeGame(gameLink):
     homeTeam, awayTeam = None, None
     statTableDivs = None
     basicScoringTable = None
-    head, body = None
+    head, body = None, None
     offenseList = None
 
     # Try to get the gamePage
@@ -88,18 +88,18 @@ def scrapeStats():
     # will use this once the container is actually running
     # Determine week of the season
     try:
-        week = determineWeek()
-        weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
-        weekPage = RequestUtils.getContent(weeklyURL)
+        # Testing data for now
+        week = 1
+        weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
+        # week = determineWeek()
+        # weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
+        # weekPage = RequestUtils.getContent(weeklyURL)
     except:
         logging.error('Failed to get the week page')
         logging.exception('')
         # Failed to get week page. Cannot scrape games. No point in continuing.
         return
 
-    # Testing data for now
-    week = 1
-    weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
 
     try:
         gameLinks = ScrapingUtils.getWeeklyGameLinks(weekPage)
