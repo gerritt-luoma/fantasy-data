@@ -14,12 +14,16 @@
 3. These will be parsed and stored in my local mongo db server to be accessed in a node application
 
 ## TODO
+- [ ] Improve logging to not include requests library debug logs (set them to warning or greater)
+- [ ] Refactor RequestUtils.py to use a session.  Create a session with the site and then use get for all remaining requests
 - [ ] **MAJOR**: Add better error checking for scraping. Right now it's mostly just "trust me bro it works" but I **will** run into an issue eventually that will cause major problems.
 - [ ] Should set up actual logging
 - [ ] Refactor DBUtils.py to take a class approach.  This way I can connect **ONCE** before scraping instead of connecting every time I try to write to the db.
 - [ ] Think of way to inform me of if there was a scraping error?  Like send me an email or a message or something?
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
+- [x] Should set up actual logging
 - [x] Alter scraping to only add fields that contain values.  (Ex. Wide receivers that don't have passing stats should not have passing data stored)
+- [x] **MAJOR**: Add better error checking for scraping. Right now it's mostly just "trust me bro it works" but I **will** run into an issue eventually that will cause major problems.
 - [x] Fix dotenv not loading user and password from .env in docker container
 - [x] Fix port binding connection between mongodb and container on rpi
 - [x] Continue building out the scraper
@@ -33,5 +37,5 @@
    ```
 3. Once the build completes, run the container
    ```
-   $ docker run --add-host=mongoservice:172.17.0.1 fantasy-data-scraper
+   $ docker run --add-host=mongoservice:172.17.0.1 -v ~/logs:/usr/logs/ fantasy-data-scraper
    ```
