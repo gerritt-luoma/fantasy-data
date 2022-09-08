@@ -80,6 +80,14 @@ def determineWeek():
     numWeeks = daysDifference // 7
     return numWeeks
 
+def flattenListAddWeek(weekList, week):
+    flatList = []
+    for gameList in weekList:
+        for game in gameList:
+            game['week'] = week
+            flatList.append(game)
+    return flatList
+
 def scrapeStats():
     # will use this once the container is actually running
     # Determine week of the season
@@ -122,6 +130,6 @@ def scrapeStats():
         # Sleep for 3 second so I don't get banned lmao
         time.sleep(3)
     # Flatten list of game lists into one large lists for a mass insert
-    flattenedList = [game for gameList in weekList for game in gameList]
+    flattenedList = flattenListAddWeek(weekList, week)
     dbUtils.writeToDatabase(week, flattenedList)
     dbUtils.disconnect()
