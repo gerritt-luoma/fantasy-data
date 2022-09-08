@@ -14,11 +14,11 @@
 3. These will be parsed and stored in my local mongo db server to be accessed in a node application
 
 ## TODO
-- [ ] Improve logging to not include requests library debug logs (set them to warning or greater)
 - [ ] Alter scraping to be just one list of objects to add en masse.  This will make querying much easier.  This means I will need to include the team abbreviation in player info and week number in object.  Get rid of week subcollections and just have a collection for each year
 - [ ] Refactor RequestUtils.py to use a session and a class approach.  Create a session with the site and then use get for all remaining requests
 - [ ] Think of way to inform me of if there was a scraping error?  Like send me an email or a message or something?
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
+- [x] Improve logging to not include requests library debug logs (set them to warning or greater)
 - [x] Refactor DBUtils.py to take a class approach.  This way I can connect **ONCE** before scraping instead of connecting every time I try to write to the db.
 - [x] Should set up actual logging
 - [x] Alter scraping to only add fields that contain values.  (Ex. Wide receivers that don't have passing stats should not have passing data stored)
