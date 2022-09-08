@@ -27,10 +27,9 @@ class DBUtils:
         self.client = None
 
     def writeToDatabase(self, week, data):
-        year = self.db['2021']
+        collection = self.db['twentyOne']
 
         try:
-            collection = year[f'week_{week}']
             collection.insert_many(data)
         except:
             logging.error(f'Failed to write week #{week} to database')

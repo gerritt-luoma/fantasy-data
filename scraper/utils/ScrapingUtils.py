@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, Comment
 import hashlib
+import logging
 """
     A collection of utility functions used for scraping the weekly game statistics from PFR
 """
@@ -11,7 +12,7 @@ def getSoup(content):
     try:
         contentSoup = BeautifulSoup(content, 'html.parser')
     except:
-        print("There was an error converting content to soup")
+        logging.error("There was an error converting content to soup")
     return contentSoup
 
 # getWeeklyGameLinks takes the raw html of the weekly games page from PFR
@@ -29,7 +30,7 @@ def getWeeklyGameLinks(gamesPage):
             if link.has_attr('href'):
                 gamesLinks.append(link['href'])
             else:
-                print('Could not extract link')
+                logging.warning(f'Could not extract link')
     return gamesLinks
 
 # getTeamNames takes the singlular game page html and finds the team names from the title of the page
@@ -103,7 +104,7 @@ def convertStatIfNecessary(stat):
 # scrapeBasicOffense is used to scrape the table containing all basic stats of
 # passing, receiving, rushing, and fumbles as well as pulling the names of the players
 # returns a list of dictionaries containing the scraped info
-def scrapeBasicOffense(head, body):
+def scrapeBasicOffense(head, body, homeTeam, awayTeam):
     # Absolutely YUUUUUGE function.  Could potentially break it down
 
     # This is a fat declaration
@@ -122,6 +123,8 @@ def scrapeBasicOffense(head, body):
             # Find all th and trs
             cells = row.find_all(recursive=False)
             player = {
+                'home': homeTeam,
+                'away': awayTeam,
                 'info': {},
                 'passing': {},
                 'rushing': {},
@@ -146,13 +149,13 @@ def scrapeBasicOffense(head, body):
                 elif count < numFumbles:
                     player['fumbles'][stat] = value
                 else:
-                    print(f'Should never get here.\nstat: {stat}, value: {value}')
+                    logging.warning(f'Should never get here.\nstat: {stat}, value: {value}')
                 count += 1
             
             # To save up on storage space I should remove all sub dicts that only contain 0
             # Probably a pretty choppy way of doing this.  May want to refactor in the future
             for key in player.copy():
-                if key != 'player_id' and key != 'info':
+                if key != 'player_id' and key != 'info' and key != 'home' and key != 'away':
                     allZeros = all(value == 0 for value in player[key].values())
                     if allZeros:
                         del player[key]
