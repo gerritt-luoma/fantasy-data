@@ -50,12 +50,13 @@ def scrapeGame(gameLink):
     try:
         basicScoringTable = ScrapingUtils.getTableByName('all_player_offense', statTableDivs)
         head, body = ScrapingUtils.getTableHeadAndBody(basicScoringTable)
-        offenseList = ScrapingUtils.scrapeBasicOffense(head, body)
+        offenseList = ScrapingUtils.scrapeBasicOffense(head, body, homeTeam, awayTeam)
     except:
         logging.error('Failed to scrape the basic scoring table')
         logging.exception('')
         # Failed to scrape the basic scoring table.  Exit from function
 
+    # Scrape each advanced offense table
     for tableName in advancedTableNames:
         try:
             advancedStatTableDiv = ScrapingUtils.getTableByName(tableName, statTableDivs)
@@ -69,12 +70,7 @@ def scrapeGame(gameLink):
             logging.exception('')
             return None
 
-    gameDict = {
-        'home': homeTeam,
-        'away': awayTeam,
-        'stats': offenseList
-    }
-    return gameDict
+    return offenseList
 
 def determineWeek():
     numWeeks = None
@@ -117,7 +113,7 @@ def scrapeStats():
         return
 
     for i, game in enumerate(gameLinks):
-        logging.info(f'Scraping game #{i+1} for week ${week}')
+        logging.info(f'Scraping game #{i+1} for week #{week}')
         scrapedGame = scrapeGame(game)
 
         if scrapedGame:
@@ -125,6 +121,7 @@ def scrapeStats():
 
         # Sleep for 3 second so I don't get banned lmao
         time.sleep(3)
-    
-    dbUtils.writeToDatabase(week, weekList)
+    # Flatten list of game lists into one large lists for a mass insert
+    flattenedList = [game for gameList in weekList for game in gameList]
+    dbUtils.writeToDatabase(week, flattenedList)
     dbUtils.disconnect()
