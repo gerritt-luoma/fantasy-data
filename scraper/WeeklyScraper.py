@@ -75,7 +75,7 @@ def determineWeek():
     numWeeks = None
     startDate = date(2022, 9, 6)
     todaysDate = date.today()
-    daysDifference = todaysDate - startDate
+    daysDifference = (todaysDate - startDate).days
     numWeeks = daysDifference // 7
     return numWeeks
 
