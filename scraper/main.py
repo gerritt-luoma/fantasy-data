@@ -15,8 +15,6 @@ def main():
     startLogging()
     # When the container is officially running it will scrape every Tuesday at 1:30 AM
     # (hopefully they will have all of the stats out by then)
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(60)
-    # Testing ground
-    WeeklyScraper.scrapeStats()
+    while True:
+        schedule.run_pending()
+        time.sleep(60)

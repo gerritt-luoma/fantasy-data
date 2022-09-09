@@ -15,10 +15,10 @@
 
 ## TODO
 - [ ] Improve logging to not include requests library debug logs (set them to warning or greater). The fix I initially tried did not work.
-- [ ] **ADD THE WEEK TO THE PLAYERS**
 - [ ] Refactor RequestUtils.py to use a session and a class approach.  Create a session with the site and then use get for all remaining requests
 - [ ] Think of way to inform me of if there was a scraping error?  Like send me an email or a message or something?
 - [ ] Clean up requirements.txt to remove any unnecessary modules.  Right now I am installing things like the python notebook kernel in the docker container which is very unnecessary
+- [x] **ADD THE WEEK TO THE PLAYERS**
 - [x] Alter scraping to be just one list of objects to add en masse.  This will make querying much easier.  This means I will need to include the team abbreviation in player info.  Get rid of week subcollections and just have a collection for each year
 - [x] Refactor DBUtils.py to take a class approach.  This way I can connect **ONCE** before scraping instead of connecting every time I try to write to the db.
 - [x] Should set up actual logging

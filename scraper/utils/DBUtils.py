@@ -27,7 +27,7 @@ class DBUtils:
         self.client = None
 
     def writeToDatabase(self, week, data):
-        collection = self.db['twentyOne']
+        collection = self.db['twentyTwo']
 
         try:
             collection.insert_many(data)

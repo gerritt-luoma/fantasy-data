@@ -1,10 +1,9 @@
+from datetime import date
+import logging
+import time
 from utils import ScrapingUtils
 from utils import RequestUtils
 from utils.DBUtils import DBUtils
-import time
-from datetime import date
-import json
-import logging
 
 baseURL = 'https://www.pro-football-reference.com/'
 
@@ -92,12 +91,9 @@ def scrapeStats():
     # will use this once the container is actually running
     # Determine week of the season
     try:
-        # Testing data for now
-        week = 1
-        weekPage = RequestUtils.getContent('https://www.pro-football-reference.com/years/2021/week_1.htm')
-        # week = determineWeek()
-        # weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
-        # weekPage = RequestUtils.getContent(weeklyURL)
+        week = determineWeek()
+        weeklyURL = f'{baseURL}years/2022/week_{week}.htm'
+        weekPage = RequestUtils.getContent(weeklyURL)
     except:
         logging.error('Failed to get the week page')
         logging.exception('')
