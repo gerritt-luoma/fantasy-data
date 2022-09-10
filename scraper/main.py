@@ -3,7 +3,7 @@ import time
 import WeeklyScraper
 import logging
 
-schedule.every().tuesday.at("01:30").do(WeeklyScraper.scrapeStats)
+schedule.every().thursday.at("01:30").do(WeeklyScraper.scrapeStats)
 
 def startLogging():
     logging.basicConfig(filename='/usr/logs/logs.log', format='%(levelname)s: %(filename)s:%(lineno)d - %(message)s:',encoding='utf-8', filemode='w',level=logging.DEBUG)
