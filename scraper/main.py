@@ -6,15 +6,22 @@ import WeeklyScraper
 
 
 def startLogging():
-    logging.basicConfig(filename='/usr/logs/logs.log', format='%(levelname)s: %(filename)s:%(lineno)d - %(message)s:',encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(
+        filename='/usr/logs/logs.log',
+        format='%(asctime)s: %(levelname)s: %(filename)s:%(lineno)d - %(message)s:',
+        encoding='utf-8',
+        datefmt="%m-%d %H:%M:%S",
+        level=logging.DEBUG)
 
     # Remove logging debug logs
     logging.getLogger("requests").setLevel(logging.WARNING)
     logging.debug("Logging has started")
 
 def scrapeWeekInThread():
+    logging.debug('Creating job thread')
     jobThread = threading.Thread(target=WeeklyScraper.scrapeStats)
     jobThread.start()
+    logging.debug('Started job thread')
 
 
 schedule.every().thursday.at("01:30").do(scrapeWeekInThread)

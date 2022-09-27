@@ -116,6 +116,7 @@ def scrapeStats():
         # We failed to connect to db
         return
 
+    logging.info(f'There are {len(gameLinks)} games to scrape this week')
     for i, game in enumerate(gameLinks):
         logging.info(f'Scraping game #{i+1} for week #{week}')
         scrapedGame = scrapeGame(game)
@@ -127,5 +128,6 @@ def scrapeStats():
         time.sleep(3)
     # Flatten list of game lists into one large lists for a mass insert
     flattenedList = flattenListAddWeek(weekList, week)
+    logging.debug(f'Attempting to write week #{week} to database')
     dbUtils.writeToDatabase(week, flattenedList)
     dbUtils.disconnect()
